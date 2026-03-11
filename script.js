@@ -1,6 +1,7 @@
 // selected content
 const itemList = document.querySelector(".items");
 const form = document.querySelector("#item-form");
+const clearBtn = document.querySelector("#clear");
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
@@ -31,4 +32,11 @@ itemList.addEventListener("click", function (e) {
     const li = e.target.closest("li");
     itemList.removeChild(li);
   }
+});
+
+// removes all elementes from the list
+clearBtn.addEventListener("click", function () {
+  const li = itemList.children;
+  itemList.remove(li);
+  console.log(li);
 });
