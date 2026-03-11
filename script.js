@@ -12,4 +12,12 @@ function createListItems(inputValue) {
   const li = document.createElement("li");
   li.textContent = inputValue;
   itemList.appendChild(li);
+
+  const btn = document.createElement("button");
+  btn.className = " remove-item btn-link text-red";
+  li.appendChild(btn);
+
+  const icon = document.createElement("i");
+  icon.className = "fa-solid fa-xmark";
+  btn.appendChild(icon);
 }
