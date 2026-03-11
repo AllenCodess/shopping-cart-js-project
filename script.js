@@ -21,3 +21,10 @@ function createListItems(inputValue) {
   icon.className = "fa-solid fa-xmark";
   btn.appendChild(icon);
 }
+
+itemList.addEventListener("click", function (e) {
+  if (e.target.closest(".remove-item")) {
+    const li = e.target.closest("li");
+    itemList.removeChild(li);
+  }
+});
