@@ -8,6 +8,7 @@ addItemBtn.addEventListener("click", function (e) {
   createListItems(inputValue);
 });
 
+// creates elements, adds classes, appends to DOM
 function createListItems(inputValue) {
   const li = document.createElement("li");
   li.textContent = inputValue;
@@ -20,8 +21,11 @@ function createListItems(inputValue) {
   const icon = document.createElement("i");
   icon.className = "fa-solid fa-xmark";
   btn.appendChild(icon);
+
+  document.querySelector(".form-input").value = " ";
 }
 
+// removes elements when clicked
 itemList.addEventListener("click", function (e) {
   if (e.target.closest(".remove-item")) {
     const li = e.target.closest("li");
