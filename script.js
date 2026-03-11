@@ -2,6 +2,7 @@
 const itemList = document.querySelector(".items");
 const form = document.querySelector("#item-form");
 const clearBtn = document.querySelector("#clear");
+const filter = document.querySelector("#filter");
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
@@ -24,6 +25,7 @@ function createListItems(inputValue) {
   btn.appendChild(icon);
 
   document.querySelector(".form-input").value = " ";
+  checkUi();
 }
 
 // removes elements when clicked
@@ -31,12 +33,26 @@ itemList.addEventListener("click", function (e) {
   if (e.target.closest(".remove-item")) {
     const li = e.target.closest("li");
     itemList.removeChild(li);
+    checkUi();
   }
 });
 
 // removes all elementes from the list
 clearBtn.addEventListener("click", function () {
-  const li = itemList.children;
-  itemList.remove(li);
-  console.log(li);
+  itemList.innerHTML = "";
+  checkUi();
 });
+
+//clear UI
+function checkUi() {
+  const items = itemList.querySelectorAll("li");
+  if (items.length === 0) {
+    clearBtn.style.display = "none";
+    filter.style.display = "none";
+  } else {
+    clearBtn.style.display = "block";
+    filter.style.display = "block";
+  }
+}
+
+checkUi();
