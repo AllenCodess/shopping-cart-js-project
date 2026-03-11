@@ -1,8 +1,8 @@
 // selected content
-const addItemBtn = document.querySelector(".btn");
 const itemList = document.querySelector(".items");
+const form = document.querySelector("#item-form");
 
-addItemBtn.addEventListener("click", function (e) {
+form.addEventListener("submit", function (e) {
   e.preventDefault();
   const inputValue = document.querySelector(".form-input").value;
   createListItems(inputValue);
