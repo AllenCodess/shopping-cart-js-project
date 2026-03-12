@@ -43,6 +43,24 @@ clearBtn.addEventListener("click", function () {
   checkUi();
 });
 
+//filter items
+
+filter.addEventListener("input", filterItems);
+
+function filterItems(e) {
+  let text = e.target.value.toLowerCase();
+  let items = itemList.querySelectorAll("li");
+
+  items.forEach(function (item) {
+    const itemName = item.firstChild.textContent.toLowerCase();
+    if (itemName.includes(text)) {
+      item.style.display = "flex";
+    } else {
+      item.style.display = "none";
+    }
+  });
+}
+
 //clear UI
 function checkUi() {
   const items = itemList.querySelectorAll("li");
@@ -54,5 +72,3 @@ function checkUi() {
     filter.style.display = "block";
   }
 }
-
-checkUi();
