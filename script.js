@@ -4,11 +4,13 @@ const form = document.querySelector("#item-form");
 const clearBtn = document.querySelector("#clear");
 const filter = document.querySelector("#filter");
 
-form.addEventListener("submit", function (e) {
+form.addEventListener("submit", onAddItemSubmit);
+
+function onAddItemSubmit(e) {
   e.preventDefault();
   const inputValue = document.querySelector(".form-input").value;
   createListItems(inputValue);
-});
+}
 
 // creates elements, adds classes, appends to DOM
 function createListItems(inputValue) {
