@@ -4,12 +4,14 @@ const form = document.querySelector("#item-form");
 const clearBtn = document.querySelector("#clear");
 const filter = document.querySelector("#filter");
 
+//form submission event and function
 form.addEventListener("submit", onAddItemSubmit);
 
 function onAddItemSubmit(e) {
   e.preventDefault();
   const inputValue = document.querySelector(".form-input").value;
   createListItems(inputValue);
+  addItemToLocalStorage(inputValue);
 }
 
 // creates elements, adds classes, appends to DOM
@@ -28,6 +30,23 @@ function createListItems(inputValue) {
 
   document.querySelector(".form-input").value = " ";
   checkUi();
+}
+
+//add item to localstorage
+function addItemToLocalStorage(inputValue) {
+  let itemsFromStorage;
+
+  if (localStorage.getItem("items") === null) {
+    itemsFromStorage = [];
+  } else {
+    itemsFromStorage = JSON.parse(localStorage.getItem("items"));
+  }
+
+  // Add new item to array
+  itemsFromStorage.push(inputValue);
+
+  //Convert to JSON string and set to local storage
+  localStorage.setItem("items", JSON.stringify(itemsFromStorage));
 }
 
 // removes elements when clicked
