@@ -7,7 +7,7 @@ const filter = document.querySelector("#filter");
 //event listeners
 form.addEventListener("submit", onAddItemSubmit); //form submission event and function
 document.addEventListener("DOMContentLoaded", displayItemsFromStorage); // event to display items when loaded
-itemList.addEventListener("click", removeItems); //removes items
+itemList.addEventListener("click", onClickItems); //removes items
 clearBtn.addEventListener("click", clearItems); //clear items
 filter.addEventListener("input", filterItems); //filter items
 
@@ -36,14 +36,30 @@ function createListItems(inputValue) {
   checkUi();
 }
 
-function removeItems(e) {
-  if (e.target.closest(".remove-item")) {
-    const li = e.target.closest("li");
-    itemList.removeChild(li);
-    checkUi();
+function onClickItems(e) {
+  if (e.target.parentElement.classList.contains("remove-item")) {
+    removeItems(e.target.parentElement.parentElement);
   }
+  checkUi();
 }
-// removes elements when clicked
+
+function removeItems(item) {
+  //remove item from DOM
+  item.remove();
+
+  //function to remove item from Local Storage
+  removeItemFromStorage(item.textContent);
+}
+
+function removeItemFromStorage(item) {
+  let itemsFromStorage = getItemsFromStorage();
+
+  // Filter out item to be removed
+  itemsFromStorage = itemsFromStorage.filter((i) => i !== item);
+
+  //re-set to localStorage
+  localStorage.setItem("items", JSON.stringify(itemsFromStorage));
+}
 
 function clearItems() {
   itemList.innerHTML = "";
