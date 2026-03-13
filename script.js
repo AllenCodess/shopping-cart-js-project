@@ -3,6 +3,7 @@ const itemList = document.querySelector(".items");
 const form = document.querySelector("#item-form");
 const clearBtn = document.querySelector("#clear");
 const filter = document.querySelector("#filter");
+let isEditMode = false;
 
 //event listeners
 form.addEventListener("submit", onAddItemSubmit); //form submission event and function
@@ -39,8 +40,15 @@ function createListItems(inputValue) {
 function onClickItems(e) {
   if (e.target.parentElement.classList.contains("remove-item")) {
     removeItems(e.target.parentElement.parentElement);
+  } else {
+    setItemToEdit(e.target);
   }
   checkUi();
+}
+
+function setItemToEdit(item) {
+  isEditMode = true;
+  item.classList.add("edit-mode");
 }
 
 function removeItems(item) {
