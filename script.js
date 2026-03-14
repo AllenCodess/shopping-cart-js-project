@@ -16,8 +16,17 @@ filter.addEventListener("input", filterItems); //filter items
 function onAddItemSubmit(e) {
   e.preventDefault();
   const inputValue = document.querySelector(".form-input").value;
+
+  if (isEditMode) {
+    const itemToEdit = itemList.querySelector(".edit-mode");
+    removeItemFromStorage(itemToEdit.textContent);
+    itemToEdit.remove();
+    isEditMode = false;
+  }
+
   createListItems(inputValue);
   addItemToLocalStorage(inputValue);
+  checkUi();
 }
 
 // creates elements, adds classes, appends to DOM
@@ -35,7 +44,6 @@ function createListItems(inputValue) {
   btn.appendChild(icon);
 
   document.querySelector(".form-input").value = " ";
-  checkUi();
 }
 
 function onClickItems(e) {
@@ -44,7 +52,6 @@ function onClickItems(e) {
   } else {
     setItemToEdit(e.target);
   }
-  checkUi();
 }
 
 function setItemToEdit(item) {
@@ -108,6 +115,11 @@ function checkUi() {
     clearBtn.style.display = "block";
     filter.style.display = "block";
   }
+
+  formbtn.innerHTML = '<i class="fa-solid fa-plus"></i> Add Item';
+  formbtn.style.backgroundColor = "#333";
+
+  isEditMode = false;
 }
 
 //LOCAL STORAGE
