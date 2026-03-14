@@ -49,9 +49,14 @@ function onClickItems(e) {
 
 function setItemToEdit(item) {
   isEditMode = true;
+  const listItems = itemList.querySelectorAll("li");
+  listItems.forEach((i) => i.classList.remove("edit-mode"));
   item.classList.add("edit-mode");
   formbtn.innerHTML = '<i class="fa-solid fa-pen"> </i>   Update Item';
+
   formbtn.style.backgroundColor = "#228B22";
+  let inputValue = document.querySelector(".form-input");
+  inputValue.value = item.textContent;
 }
 
 function removeItems(item) {
