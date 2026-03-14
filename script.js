@@ -3,6 +3,7 @@ const itemList = document.querySelector(".items");
 const form = document.querySelector("#item-form");
 const clearBtn = document.querySelector("#clear");
 const filter = document.querySelector("#filter");
+const formbtn = form.querySelector("button");
 let isEditMode = false;
 
 //event listeners
@@ -49,6 +50,8 @@ function onClickItems(e) {
 function setItemToEdit(item) {
   isEditMode = true;
   item.classList.add("edit-mode");
+  formbtn.innerHTML = '<i class="fa-solid fa-pen"> </i>   Update Item';
+  formbtn.style.backgroundColor = "#228B22";
 }
 
 function removeItems(item) {
