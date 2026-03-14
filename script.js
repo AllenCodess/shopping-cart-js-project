@@ -22,10 +22,16 @@ function onAddItemSubmit(e) {
     removeItemFromStorage(itemToEdit.textContent);
     itemToEdit.remove();
     isEditMode = false;
+  } else {
+    if (noDuplicates(inputValue)) {
+      alert("item already exist");
+      return;
+    }
   }
 
   createListItems(inputValue);
   addItemToLocalStorage(inputValue);
+
   checkUi();
 }
 
@@ -120,6 +126,13 @@ function checkUi() {
   formbtn.style.backgroundColor = "#333";
 
   isEditMode = false;
+}
+
+//prevent duplicate items
+
+function noDuplicates(item) {
+  const itemsFromStorage = getItemsFromStorage();
+  return itemsFromStorage.includes(item);
 }
 
 //LOCAL STORAGE
